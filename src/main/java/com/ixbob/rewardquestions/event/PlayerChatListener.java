@@ -1,5 +1,6 @@
-package com.ixbob.rewardquestions;
+package com.ixbob.rewardquestions.event;
 
+import com.ixbob.rewardquestions.Main;
 import com.ixbob.rewardquestions.task.AnswerTimeLimitTimerRunnable;
 import com.ixbob.rewardquestions.task.RandomQuestionTimerRunnable;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -7,6 +8,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,6 +45,9 @@ public class PlayerChatListener implements Listener {
                 }
 
                 player.sendMessage(Component.text("§a你答对了！"));
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+                Bukkit.broadcast(Component.text("§e" + player.getName() + "§a答对了"));
+
                 answerRunnable.getAnsweredPlayers().add(player);
 
                 giveMustRewards(player);
