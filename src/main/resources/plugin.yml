@@ -1,0 +1,4 @@
+name: Main
+version: '${version}'
+main: com.ixbob.rewardquestions.Main
+api-version: '1.20'
