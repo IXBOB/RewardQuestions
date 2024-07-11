@@ -15,13 +15,16 @@ public class QuesreloadCommand implements CommandExecutor {
         if (commandSender instanceof ConsoleCommandSender console) {
             Main.getInstance().reloadConfig();
             console.sendMessage(Component.text("§a已重新加载插件"));
+            return true;
         }
         else if (commandSender instanceof Player player) {
-            if (player.isOp()) {
+            if (player.hasPermission("RewardQuestions.quesreload")) {
                 Main.getInstance().reloadConfig();
                 player.sendMessage(Component.text("§a已重新加载插件"));
+                return true;
             }
+            return false;
         }
-        return true;
+        return false;
     }
 }

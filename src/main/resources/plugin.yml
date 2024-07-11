@@ -7,3 +7,5 @@ commands:
   quesreload:
     description: Reload the rewardquestion plugin.
     usage: /<command>
+    permission: RewardQuestions.quesreload
+    permission-message: You don't have permission <permission>!
