@@ -19,12 +19,17 @@ import java.util.Random;
 
 public class PlayerChatListener implements Listener {
 
+    @SuppressWarnings("unchecked")
     ArrayList<ArrayList<Object>> mustRewardList = (ArrayList<ArrayList<Object>>) Main.getInstance().getConfig().get("must_rewards");
+    @SuppressWarnings("unchecked")
     ArrayList<ArrayList<Object>> probRewardList = (ArrayList<ArrayList<Object>>) Main.getInstance().getConfig().get("probability_rewards");
 
 
     @EventHandler
     public void onPlayerChat(AsyncChatEvent event) {
+        if (Main.getInstance().getQuestionTimer().getAnswerRunnable() == null) {
+            return;
+        }
         if (!Main.getInstance().getQuestionTimer().getAnswerRunnable().expired) {
             RandomQuestionTimerRunnable QuestionTimer = Main.getInstance().getQuestionTimer();
             AnswerTimeLimitTimerRunnable answerRunnable = QuestionTimer.getAnswerRunnable();
@@ -72,6 +77,7 @@ public class PlayerChatListener implements Listener {
                 continue;
             }
 
+            @SuppressWarnings("unchecked")
             ArrayList<Object> innerList = (ArrayList<Object>) rewardObj.get(0);
 
             giveRewards(player, innerList);
